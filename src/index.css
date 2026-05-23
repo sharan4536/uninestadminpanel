@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --ease-app: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --ease-soft: cubic-bezier(0.4, 0.0, 0.2, 1); /* Fallback */
+}
+
+@layer base {
+  :root {
+    /* Core OS Palette - Sky Blue (#38BDF8) & White (#FFFFFF) */
+    --background: 204 45% 97%; /* #F2F8FC Whisper of blue-white */
+    --foreground: 215 25% 20%; /* Darker slate for readability */
+
+    --card: 0 0% 100%; /* Pure white */
+    --card-foreground: 215 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 20%;
+
+    /* Sky Blue Primary #38BDF8 */
+    --primary: 198 93% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 20% 96%; /* Neutral pale gray */
+    --secondary-foreground: 215 25% 15%;
+
+    --muted: 210 20% 95%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 198 93% 96%; /* Very light blue accent */
+    --accent-foreground: 198 93% 40%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 90%;
+    --input: 214 20% 90%;
+    --ring: 198 93% 60%;
+
+    --radius: 0.75rem; /* Slightly tighter, app-like rounding */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-sky-100 selection:text-sky-900;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15px; /* OS-like body size */
+    line-height: 1.4;
+    overflow: hidden; /* Prevent body scrolling; use strict container structures inside */
+  }
+}
+
+@layer utilities {
+
+  /* App-native Utilities */
+  .glass-panel {
+    @apply border border-white/60 bg-white/75 backdrop-blur-xl shadow-[0_20px_60px_rgba(15,23,42,0.12)];
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .campus-glass-card {
+    @apply border border-white/45 bg-white/58 backdrop-blur-[20px] shadow-[0_18px_50px_rgba(15,23,42,0.12)];
+  }
+
+  .campus-vibe-pill {
+    @apply border border-white/45 bg-white/42 backdrop-blur-[14px];
+  }
+
+  .campus-glass-icon {
+    @apply border border-white/55 bg-white/68 backdrop-blur-[18px];
+  }
+
+  .campus-live-ring {
+    box-shadow: 0 0 0 2px #f1f7fb, 0 0 0 4px rgba(56, 189, 248, 0.85);
+  }
+
+  .campus-pulse-shell {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  }
+
+  @keyframes campusMePulse {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    50% { transform: scale(1.15); opacity: 0.3; }
+    100% { transform: scale(0.95); opacity: 0.7; }
+  }
+
+  .animate-spin-slow {
+    animation: spin 3s linear infinite;
+  }
+}

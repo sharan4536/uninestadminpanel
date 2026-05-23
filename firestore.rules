@@ -1,0 +1,137 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. DEBUG RULES (MOVE TO TOP)
+    match /events/{doc=**} {
+      allow read, write: if true;
+    }
+    
+    match /ads/{doc=**} {
+      allow read, write: if true;
+    }
+
+    match /adAnalytics/{doc=**} {
+      allow read, write: if true;
+    }
+
+    match /adminNotifications/{doc=**} {
+      allow read, write: if true;
+    }
+
+    match /adminUsers/{doc=**} {
+      allow read, write: if true;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    // Profiles & Users
+    match /profiles/{uid} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(uid);
+    }
+    
+    match /users/{uid} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(uid);
+    }
+
+    // Messaging (signed-in users)
+    match /conversations/{doc=**} {
+      allow read, write: if isSignedIn();
+    }
+    
+    match /messages/{doc=**} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Friendships & Social
+    match /friendRequests/{doc=**} {
+      allow read, write: if isSignedIn();
+    }
+    
+    match /friendLocations/{uid} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(uid);
+    }
+    
+    match /pulses/{pulseId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+    }
+
+    // Notifications
+    match /notifications/{userId}/{doc=**} {
+      allow read: if isOwner(userId);
+      allow write: if isSignedIn();
+    }
+    
+    // Event related sub-collections
+    match /eventAttendees/{doc=**} {
+      allow read, write: if isSignedIn();
+    }
+    
+    match /eventChats/{doc=**} {
+      allow read, write: if isSignedIn();
+    }
+    
+    match /eventInterest/{doc=**} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Timetables
+    match /timetables/{uid} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(uid);
+    }
+    
+    match /publicWidgets/{uid} {
+      allow read: if true;
+      allow write: if isOwner(uid);
+    }
+
+    // Study Groups
+    match /studyGroups/{doc=**} {
+      allow read, write: if isSignedIn();
+    }
+
+    // University request intake
+    match /universityRequests/{doc=**} {
+      allow create: if true;
+      allow read: if isSignedIn();
+      allow update, delete: if false;
+    }
+
+    // System Settings
+    match /settings/{doc=**} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+
+    // Safety Features
+    match /sos/{uid} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(uid);
+    }
+    
+    match /checkins/{uid} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(uid);
+    }
+
+    match /hangouts/{doc=**} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
