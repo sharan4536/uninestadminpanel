@@ -75,6 +75,7 @@
             "tailwindcss": "^4.1.18",
             "tailwindcss-animate": "^1.0.7",
             "typescript": "^6.0.3",
+            "vercel": "^54.4.1",
             "vite": "6.3.5"
       },
       "scripts": {
