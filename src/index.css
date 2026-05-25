@@ -88,9 +88,11 @@
   body {
     @apply bg-background text-foreground antialiased selection:bg-sky-100 selection:text-sky-900;
     font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    font-size: 15px; /* OS-like body size */
+    font-size: 15px;
     line-height: 1.4;
-    overflow: hidden; /* Prevent body scrolling; use strict container structures inside */
+    /* overflow is managed per-page: landing page scrolls, app shell clips */
+    overflow-x: hidden;
+    background-color: #f0f9ff; /* sky-50 — prevents white flash on overscroll */
   }
 }
 

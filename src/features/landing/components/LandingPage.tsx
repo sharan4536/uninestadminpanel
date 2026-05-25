@@ -113,7 +113,7 @@ export function LandingPage({ onJoinClick }: LandingPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-800 overflow-x-hidden select-none font-sans">
+    <div className="min-h-screen bg-sky-50 text-slate-800 overflow-x-hidden select-none font-sans">
       
       {/* A. LOADING SCREEN */}
       <AnimatePresence>
@@ -151,7 +151,7 @@ export function LandingPage({ onJoinClick }: LandingPageProps) {
       </AnimatePresence>
 
       {/* CAMERA SCROLL WRAPPER (GSAP pans this container upward when caps are thrown) */}
-      <div ref={cameraWrapperRef} className="w-full relative">
+      <div ref={cameraWrapperRef} className="w-full relative" style={{ willChange: 'transform' }}>
         
         {/* ========================================================
             SCREEN 1: FOGGY SKY GAZE & INTRO ANIMATION (100vh)
@@ -297,7 +297,7 @@ export function LandingPage({ onJoinClick }: LandingPageProps) {
         {/* ========================================================
             SCREEN 2: LANDING PAGE CAMPUS REVEAL (Hero + Scroll Flow)
             ======================================================== */}
-        <div className="min-h-screen w-full bg-white relative overflow-visible">
+        <div className="w-full bg-white relative overflow-visible" style={{ minHeight: '100vh' }}>
           
           {/* Glassmorphism Sticky Navbar */}
           <nav className="sticky top-0 w-full z-40 bg-white/85 backdrop-blur-md border-b border-sky-100 px-6 py-4 flex items-center justify-between shadow-sm">
@@ -448,7 +448,7 @@ export function LandingPage({ onJoinClick }: LandingPageProps) {
           </section>
 
           {/* FOOTER */}
-          <footer id="footer" className="w-full border-t border-sky-100 bg-sky-50/50 py-16 px-6 relative overflow-hidden">
+          <footer id="footer" className="w-full border-t border-sky-100 bg-sky-50 py-16 px-6 relative overflow-hidden">
             {/* Background glowing particles/lighting */}
             <div className="absolute w-72 h-72 rounded-full bg-sky-200/20 blur-[120px] bottom-[-50px] left-1/2 -translate-x-1/2" />
             
